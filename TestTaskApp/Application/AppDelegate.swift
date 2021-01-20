@@ -1,9 +1,4 @@
-//
-//  AppDelegate.swift
-//  TestTaskApp
-//
-//  Created by Elena Igumenova on 20.01.2021.
-//
+
 
 import UIKit
 
