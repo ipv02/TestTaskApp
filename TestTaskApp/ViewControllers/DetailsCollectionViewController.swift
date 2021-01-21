@@ -4,18 +4,35 @@ import UIKit
 
 class DetailsCollectionViewController: UICollectionViewController {
     
-    private let urlStringAlbums = "https://jsonplaceholder.typicode.com/albums"
-    private let urlStringPhotos = "https://jsonplaceholder.typicode.com/photos"
-    
     var albums: [Album] = []
     var photos: [Photo] = []
+    
+    var userAlbums: [Album] = []
+    var userPhotos: [Photo] = []
+    
+    var userId: User!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NetworkManager.shared.fetchPhotos(from: urlStringPhotos) { photos in
-            DispatchQueue.main.async {
+        NetworkManager.shared.fetchAlbums(for: userId.id) { albums in
+            self.albums = albums
+            for album in albums {
+                if album.userId == self.userId.id {
+                    self.userAlbums.append(album)
+                    print(self.userAlbums)
+                }
+            }
+        }
+        
+        NetworkManager.shared.fetchPhotos(for: userAlbums.first?.id ?? 0 ) { photos in
+            DispatchQueue.main.async { [self] in
                 self.photos = photos
+                for photo in photos {
+                    if photo.albumId == userAlbums.first?.id {
+                        userPhotos.append(photo)
+                    }
+                }
                 self.collectionView.reloadData()
             }
         }
@@ -23,13 +40,13 @@ class DetailsCollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        photos.count
+        userPhotos.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "detailsCell", for: indexPath) as! DetailsCollectionViewCell
         
-        let photo = photos[indexPath.item]
+        let photo = userPhotos[indexPath.item]
         cell.configureCell(with: photo)
 
         cell.customView()

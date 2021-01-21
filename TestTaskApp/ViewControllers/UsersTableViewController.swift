@@ -31,13 +31,22 @@ class UsersTableViewController: UITableViewController {
 
         return cell
     }
+    
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let user = users[indexPath.row]
+        
+        performSegue(withIdentifier: "detailsSegue", sender: user)
+    }
 
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let indexPath = tableView.indexPathForSelectedRow else { return }
-        
-        let user = users[indexPath.row].id
-        let detailsVC = segue.destination as! DetailsCollectionViewController
+        if segue.identifier == "detailsSegue" {
+            let detailsVC = segue.destination as! DetailsCollectionViewController
+            detailsVC.userId = sender as? User
+        }
     }
 }

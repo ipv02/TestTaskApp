@@ -33,9 +33,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="SnF-Uz-xv0" kind="show" id="Ftv-zu-rdg"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -44,6 +41,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Users" id="12n-6p-Bwk"/>
+                    <connections>
+                        <segue destination="SnF-Uz-xv0" kind="show" identifier="detailsSegue" id="sNu-Da-Saz"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zpp-VM-IBN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
