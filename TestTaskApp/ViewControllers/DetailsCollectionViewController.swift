@@ -3,58 +3,47 @@
 import UIKit
 
 class DetailsCollectionViewController: UICollectionViewController {
-    
-    var albums: [Album] = []
-    var photos: [Photo] = []
-    
-    var userAlbums: [Album] = []
-    var userPhotos: [Photo] = []
-    
-    var userId: User!
 
+    //MARK: - Public Properties
+    var userId: User!
+    
+    // MARK: - Private Properties
+    private var photos: [Photo] = []
+    
+    //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NetworkManager.shared.fetchAlbums(for: userId.id) { albums in
-            self.albums = albums
-            for album in albums {
-                if album.userId == self.userId.id {
-                    self.userAlbums.append(album)
-                    print(self.userAlbums)
-                }
-            }
-        }
-        
-        NetworkManager.shared.fetchPhotos(for: userAlbums.first?.id ?? 0 ) { photos in
-            DispatchQueue.main.async { [self] in
-                self.photos = photos
-                for photo in photos {
-                    if photo.albumId == userAlbums.first?.id {
-                        userPhotos.append(photo)
-                    }
-                }
-                self.collectionView.reloadData()
-            }
-        }
+        fetchAlbumsAndPhotos()
     }
 
     // MARK: UICollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        userPhotos.count
+        photos.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "detailsCell", for: indexPath) as! DetailsCollectionViewCell
         
-        let photo = userPhotos[indexPath.item]
+        let photo = photos[indexPath.item]
         cell.configureCell(with: photo)
 
         cell.customView()
         
         return cell
     }
+    
+    private func fetchAlbumsAndPhotos() {
+        NetworkManager.shared.fetchPhotos(for: userId.id) { photo in
+            DispatchQueue.main.async {
+                self.photos = photo
+                self.collectionView.reloadData()
+            }
+        }
+    }
 }
 
+//MARK: - UICollectionViewDelegateFlowLayout
 extension DetailsCollectionViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -62,6 +51,7 @@ extension DetailsCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+//MARK: - UIView
 extension UIView {
     
     func customView() {

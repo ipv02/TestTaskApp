@@ -8,10 +8,12 @@ class NetworkManager {
     
     private init() {}
     
-    
-    func fetchUsers(from urlString: String, completion: @escaping ([User]) -> Void) {
+    //MARK: - Fetch Users
+    func fetchUsers(completion: @escaping ([User]) -> Void) {
         
-        guard let url = URL(string: urlString) else { return }
+        let urlStringUsers = "https://jsonplaceholder.typicode.com/users"
+        
+        guard let url = URL(string: urlStringUsers) else { return }
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error { print(error); return }
@@ -27,43 +29,8 @@ class NetworkManager {
         }.resume()
     }
     
-//    func fetchAlbums(from urlString: String, completion: @escaping ([Album]) -> Void) {
-//
-//        guard let url = URL(string: urlString) else { return }
-//
-//        URLSession.shared.dataTask(with: url) { (data, response, error) in
-//            if let error = error { print(error); return }
-//
-//            guard let data = data else { return }
-//
-//            do {
-//                let albums = try JSONDecoder().decode([Album].self, from: data)
-//                completion(albums)
-//            } catch let error {
-//                print(error)
-//            }
-//        }.resume()
-//    }
-//
-//    func fetchPhotos(from urlString: String, completion: @escaping ([Photo]) -> Void) {
-//
-//        guard let url = URL(string: urlString) else { return }
-//
-//        URLSession.shared.dataTask(with: url) { (data, response, error) in
-//            if let error = error { print(error); return }
-//
-//            guard let data = data else { return }
-//
-//            do {
-//                let photos = try JSONDecoder().decode([Photo].self, from: data)
-//                completion(photos)
-//            } catch let error {
-//                print(error)
-//            }
-//        }.resume()
-//    }
-    
-    func fetchAlbums(for: Int, completion: @escaping ([Album]) -> Void) {
+    //MARK: - Fetch Albums
+    func fetchAlbums(for userId: Int, completion: @escaping ([Album]) -> Void) {
         
         let urlStringAlbums = "https://jsonplaceholder.typicode.com/albums"
 
@@ -76,14 +43,16 @@ class NetworkManager {
 
             do {
                 let albums = try JSONDecoder().decode([Album].self, from: data)
-                completion(albums)
+                let albumsFiltered = self.filterAlbums(albums: albums, userId: userId)
+                completion(albumsFiltered)
             } catch let error {
                 print(error)
             }
         }.resume()
     }
     
-    func fetchPhotos(for: Int, completion: @escaping ([Photo]) -> Void) {
+    //MARK: - Fetch Photos
+    func fetchPhotos(for userId: Int, completion: @escaping ([Photo]) -> Void) {
         
         let urlStringPhotos = "https://jsonplaceholder.typicode.com/photos"
         
@@ -96,10 +65,39 @@ class NetworkManager {
             
             do {
                 let photos = try JSONDecoder().decode([Photo].self, from: data)
-                completion(photos)
+                self.fetchAlbums(for: userId) { albums in
+                    let albumId = albums.first?.id
+                    let photoFiltered = self.filteredPhotos(photos: photos, albumId: albumId ?? 0)
+                    completion(photoFiltered)
+                }
+                
             } catch let error {
                 print(error)
             }
         }.resume()
+    }
+}
+
+//MARK: - Filtered arrays Albums & Photos
+extension NetworkManager {
+    
+    private func filterAlbums(albums: [Album], userId: Int) -> [Album] {
+        var filteredAlbums: [Album] = []
+        for album in albums {
+            if album.userId == userId {
+                filteredAlbums.append(album)
+            }
+        }
+        return filteredAlbums
+    }
+
+    private func filteredPhotos(photos: [Photo], albumId: Int) -> [Photo] {
+        var filteredPhotos: [Photo] = []
+        for photo in photos {
+            if photo.albumId == albumId {
+                filteredPhotos.append(photo)
+            }
+        }
+        return filteredPhotos
     }
 }

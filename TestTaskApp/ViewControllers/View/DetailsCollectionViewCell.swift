@@ -4,24 +4,20 @@ import UIKit
 
 class DetailsCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var photoUser: UIImageView!
+    //MARK: - IB Outlets
+    @IBOutlet weak var photoUser: ImageView!
     @IBOutlet weak var namePhoto: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    
+    //MARK: - Public Methods
     func configureCell(with photo: Photo) {
         namePhoto.text = photo.title
-        DispatchQueue.global().async {
-            guard let stringURL = photo.url else { return }
-            guard let imageURL = URL(string: stringURL) else { return }
-            guard let imageData = try? Data(contentsOf: imageURL) else { return }
-            
-            DispatchQueue.main.async {
-                self.activityIndicator.startAnimating()
-                self.activityIndicator.hidesWhenStopped = true
-                self.activityIndicator.stopAnimating()
-                self.photoUser.image = UIImage(data: imageData)
-            }
+        
+        DispatchQueue.main.async {
+            self.activityIndicator.startAnimating()
+            self.activityIndicator.hidesWhenStopped = true
+            self.activityIndicator.stopAnimating()
+            self.photoUser.fetchImage(from: photo.url ?? "")
         }
     }
 }
