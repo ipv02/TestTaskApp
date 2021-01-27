@@ -4,7 +4,10 @@ import UIKit
 
 class UsersTableViewController: UITableViewController {
     
+    
     // MARK: - Private Properties
+    private let urlStringUsers = "https://jsonplaceholder.typicode.com/users"
+
     private var users: [User] = []
     
     //MARK: - Life Cycle
@@ -20,9 +23,9 @@ class UsersTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! UserTableViewCell
         
-        cell.textLabel?.text = users[indexPath.row].name
+        cell.userNameLabel.text = users[indexPath.row].name
         
         return cell
     }
@@ -44,7 +47,7 @@ class UsersTableViewController: UITableViewController {
     
     // MARK: - Private Methods
     private func fetchUsers() {
-        NetworkManager.shared.fetchUsers { users in
+        NetworkManager.shared.fetchUsers(from: urlStringUsers) { users in
             DispatchQueue.main.async {
                 self.users = users
                 self.tableView.reloadData()

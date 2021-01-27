@@ -21,6 +21,10 @@
 		84A0460925B88A2200AE00E5 /* DetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0460825B88A2200AE00E5 /* DetailsCollectionViewCell.swift */; };
 		84A0461925BB77C500AE00E5 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0461825BB77C400AE00E5 /* ImageManager.swift */; };
 		84A0461C25BB783900AE00E5 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0461B25BB783900AE00E5 /* ImageView.swift */; };
+		84A0462425C09B1900AE00E5 /* FilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0462325C09B1800AE00E5 /* FilterProtocol.swift */; };
+		84A0462825C09C3400AE00E5 /* FilterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0462725C09C3400AE00E5 /* FilterData.swift */; };
+		84A0462C25C0B03800AE00E5 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0462B25C0B03800AE00E5 /* UserTableViewCell.swift */; };
+		84A0463025C0B27B00AE00E5 /* Extension UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0462F25C0B27B00AE00E5 /* Extension UIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +44,10 @@
 		84A0460825B88A2200AE00E5 /* DetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCollectionViewCell.swift; sourceTree = "<group>"; };
 		84A0461825BB77C400AE00E5 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		84A0461B25BB783900AE00E5 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		84A0462325C09B1800AE00E5 /* FilterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterProtocol.swift; sourceTree = "<group>"; };
+		84A0462725C09C3400AE00E5 /* FilterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterData.swift; sourceTree = "<group>"; };
+		84A0462B25C0B03800AE00E5 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		84A0462F25C0B27B00AE00E5 /* Extension UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension UIView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +85,8 @@
 				84A045EA25B8757E00AE00E5 /* ViewControllers */,
 				84A045EC25B8758E00AE00E5 /* Storyboards */,
 				84A045F725B878A700AE00E5 /* Managers */,
+				84A0462225C09AEB00AE00E5 /* Protocols */,
+				84A0462625C09BF700AE00E5 /* Extensions */,
 				84A045DD25B8743D00AE00E5 /* Assets.xcassets */,
 				84A045E225B8743D00AE00E5 /* Info.plist */,
 			);
@@ -133,10 +143,28 @@
 		84A0460B25B88A2800AE00E5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				84A0462B25C0B03800AE00E5 /* UserTableViewCell.swift */,
 				84A0460825B88A2200AE00E5 /* DetailsCollectionViewCell.swift */,
 				84A0461B25BB783900AE00E5 /* ImageView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		84A0462225C09AEB00AE00E5 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				84A0462325C09B1800AE00E5 /* FilterProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		84A0462625C09BF700AE00E5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				84A0462725C09C3400AE00E5 /* FilterData.swift */,
+				84A0462F25C0B27B00AE00E5 /* Extension UIView.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,13 +239,17 @@
 			files = (
 				84A045FC25B8826800AE00E5 /* Photo.swift in Sources */,
 				84A0461925BB77C500AE00E5 /* ImageManager.swift in Sources */,
+				84A0462C25C0B03800AE00E5 /* UserTableViewCell.swift in Sources */,
+				84A0463025C0B27B00AE00E5 /* Extension UIView.swift in Sources */,
 				84A0460525B8871D00AE00E5 /* DetailsCollectionViewController.swift in Sources */,
+				84A0462425C09B1900AE00E5 /* FilterProtocol.swift in Sources */,
 				84A045F325B8779B00AE00E5 /* User.swift in Sources */,
 				84A0461C25BB783900AE00E5 /* ImageView.swift in Sources */,
 				84A045D525B8743C00AE00E5 /* AppDelegate.swift in Sources */,
 				84A045F925B878C000AE00E5 /* NetworkManager.swift in Sources */,
 				84A0460925B88A2200AE00E5 /* DetailsCollectionViewCell.swift in Sources */,
 				84A045EE25B8768900AE00E5 /* UsersTableViewController.swift in Sources */,
+				84A0462825C09C3400AE00E5 /* FilterData.swift in Sources */,
 				84A045FF25B8833F00AE00E5 /* Album.swift in Sources */,
 				84A045D725B8743C00AE00E5 /* SceneDelegate.swift in Sources */,
 			);

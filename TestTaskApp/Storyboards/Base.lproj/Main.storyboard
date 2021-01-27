@@ -17,22 +17,43 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="userCell" textLabel="jxK-dY-dbm" style="IBUITableViewCellStyleDefault" id="Q6p-tG-Mmc">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="userCell" id="Q6p-tG-Mmc" customClass="UserTableViewCell" customModule="TestTaskApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q6p-tG-Mmc" id="Dji-M1-E8H">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jxK-dY-dbm">
-                                            <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="XaT-bv-ezn">
+                                            <rect key="frame" x="379" y="14" width="15" height="15"/>
+                                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="15" id="sPh-gQ-f5u"/>
+                                                <constraint firstAttribute="height" constant="18.5" id="u9c-Y8-jVK"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jEM-L7-ege">
+                                            <rect key="frame" x="20" y="0.0" width="300" height="44.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="1jI-Rl-tBv"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="XaT-bv-ezn" firstAttribute="top" secondItem="Dji-M1-E8H" secondAttribute="topMargin" constant="1" id="6eB-HS-Sc0"/>
+                                        <constraint firstAttribute="bottom" secondItem="jEM-L7-ege" secondAttribute="bottom" id="7k5-dk-hvM"/>
+                                        <constraint firstItem="jEM-L7-ege" firstAttribute="top" secondItem="Dji-M1-E8H" secondAttribute="top" id="9EZ-TG-CqZ"/>
+                                        <constraint firstItem="XaT-bv-ezn" firstAttribute="leading" secondItem="jEM-L7-ege" secondAttribute="trailing" constant="59" id="Qz1-0A-uhJ"/>
+                                        <constraint firstItem="XaT-bv-ezn" firstAttribute="trailing" secondItem="Dji-M1-E8H" secondAttribute="trailingMargin" id="mya-3c-Sct"/>
+                                        <constraint firstItem="jEM-L7-ege" firstAttribute="leading" secondItem="Dji-M1-E8H" secondAttribute="leading" constant="20" symbolic="YES" id="xW7-ZS-ALx"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="userNameLabel" destination="jEM-L7-ege" id="kxk-St-TE6"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -87,7 +108,7 @@
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="284" id="BKk-Ax-CiC"/>
                                                 <constraint firstAttribute="height" constant="44" id="bMI-dD-NYe"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -143,6 +164,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="chevron.right" catalog="system" width="96" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
